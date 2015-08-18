@@ -2,7 +2,7 @@ import scipy as sp
 import scipy.linalg as linalg
 import matplotlib.pyplot as plt
 
-from . import housing_data
+from app.ex1 import housing_data
 from gradient_descent import computeCost, featureNormalize, gradientDescent, normalEqn
 
 def run():
@@ -27,7 +27,6 @@ def run():
         theta = sp.zeros((3, 1))
         (theta, J_history) = gradientDescent(x, y, theta, alpha, num_iters)
         # Plot the value of J by number of iterations
-        numel = J_history.size
         plt.plot(range(1, J_history.size+1), J_history, '-b')
         plt.title("Alpha = %f" % (alpha))
         plt.xlabel('Number of iterations')

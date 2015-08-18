@@ -1,4 +1,4 @@
-from ex1 import ex1_multi
+from app.ex1 import ex1_multi
 import sys
 
 arguments = sys.argv
@@ -11,4 +11,6 @@ for arg in arguments:
 
 if optional_argument != True:
     # Run web application
-    pass
+    from app.webapp import app
+    if __name__ == '__main__':
+        app.run(debug=True)
