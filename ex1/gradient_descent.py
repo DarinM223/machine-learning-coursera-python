@@ -85,7 +85,7 @@ alphas = [0.01, 0.03, 0.1, 0.3, 1.0]
 for alpha in alphas:
     theta = sp.zeros((3, 1))
     (theta, J_history) = gradientDescent(x, y, theta, alpha, num_iters)
-    # Plot the value of
+    # Plot the value of J by number of iterations
     numel = J_history.size
     plt.plot(range(1, J_history.size+1), J_history, '-b')
     plt.title("Alpha = %f" % (alpha))
@@ -93,6 +93,14 @@ for alpha in alphas:
     plt.ylabel('J')
     plt.xlim([0, 50])
     plt.show(block=True)
+
+    # Estimate the price of a 1650 sq-ft, 3 br house
+    price = 0
+    house = sp.array([[1.0, 1650.0, 3.0]])
+    # Normalize the features
+    house[0, 1:] = (house[0, 1:] - mu) / sigma
+    price = house.dot(theta)
+    print 'The estimated price with alpha', alpha, 'is', price[0, 0]
 
 # Reload the data
 data = sp.genfromtxt(PATH, delimiter=',')
