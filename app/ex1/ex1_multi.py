@@ -28,7 +28,7 @@ def run():
         (theta, J_history) = gradientDescent(x, y, theta, alpha, num_iters)
         # Plot the value of J by number of iterations
         plt.plot(range(1, J_history.size+1), J_history, '-b')
-        plt.title("Alpha = %f" % (alpha))
+        plt.title('Alpha = %f' % (alpha))
         plt.xlabel('Number of iterations')
         plt.ylabel('J')
         plt.xlim([0, 50])
@@ -53,5 +53,5 @@ def run():
     
     # Calculate the normal equation
     theta = normalEqn(x, y)
-    print("Theta computed from the normal equations:")
+    print('Theta computed from the normal equations:')
     print(theta)

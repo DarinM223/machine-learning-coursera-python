@@ -43,5 +43,9 @@ def gradientDescent(x, y, theta, alpha, num_iters):
     return (grad, J_history)
 
 def normalEqn(x, y):
+    """
+    Determines theta using a mathmatical formula instead of gradient descent
+    """
     theta = linalg.inv(x.T.dot(x)).dot(x.T).dot(y)
     return theta
+
