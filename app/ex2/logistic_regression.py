@@ -1,5 +1,6 @@
 import scipy as sp
 from scipy.optimize import fmin
+import matplotlib.pyplot as plt
 
 def sigmoid(z):
     """
@@ -13,7 +14,12 @@ def costFunction(flattendTheta, X, y):
     """
     # numpy fmin function only allows flattened arrays instead of
     # matrixes which is stupid so it has to be converted every time
-    theta = sp.asmatrix(flattendTheta).T
+    flattendTheta = sp.asmatrix(flattendTheta)
+    (a, b) = flattendTheta.shape
+    if a < b:
+        theta = flattendTheta.T
+    else:
+        theta = flattendTheta
     m = sp.shape(y)[0]
     J = (1.0/m) * ((-y).T.dot(sp.log(sigmoid(X.dot(theta)))) - \
                    (-y + 1).T.dot(sp.log(-sigmoid(X.dot(theta)) + 1)))
@@ -28,7 +34,12 @@ def costFunctionReg(flattendTheta, X, y, lmbda):
     """
     # numpy fmin function only allows flattened arrays instead of
     # matrixes which is stupid so it has to be converted every time
-    theta = sp.asmatrix(flattendTheta).T
+    flattendTheta = sp.asmatrix(flattendTheta)
+    (a, b) = flattendTheta.shape
+    if a < b:
+        theta = flattendTheta.T
+    else:
+        theta = flattendTheta
     m = sp.shape(y)[0]
     (J, grad) = costFunction(flattendTheta, X, y)
 
@@ -61,4 +72,27 @@ def find_minimum_theta(theta, X, y):
     """
     result = fmin(_costFn, x0=theta, args=(X, y), maxiter=400, full_output=True)
     return result[0], result[1]
+
+def plotData(data):
+    """
+    Plots students that are both admitted and not admitted into a university
+    """
+    pos = data[data[:, 2] == 1]
+    neg = data[data[:, 2] == 0]
+
+    plt.xlabel('Exam 1 score')
+    plt.ylabel('Exam 2 score')
+    plt.scatter(pos[:, 0], pos[:, 1], c='b', marker='+', s=40, linewidths=2, label='Admitted')
+    plt.scatter(neg[:, 0], neg[:, 1], c='y', marker='o', s=40, linewidths=1, label='Not admitted')
+    plt.legend()
+
+def plotDecisionBoundary(data, X, theta):
+    """
+    Plots the data points X and y into a new figure with the
+    decision boundary defined by theta
+    """
+    plotData(data)
+    plot_x = sp.array([min(X[:, 1]), max(X[:, 1])])
+    plot_y = (-1.0 / theta[2]) * (theta[1] * plot_x + theta[0])
+    plt.plot(plot_x, plot_y)
 

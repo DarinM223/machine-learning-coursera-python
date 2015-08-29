@@ -5,4 +5,5 @@ app = Flask(__name__)
 
 # Import routes
 from ex1 import routes
+from ex2 import routes
 
