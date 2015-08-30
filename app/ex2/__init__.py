@@ -1,7 +1,9 @@
 import scipy as sp
 import os
 
-PATH = os.path.join(os.path.dirname(__file__), 'data1.txt') 
+ADMISSION_PATH = os.path.join(os.path.dirname(__file__), 'data1.txt') 
+MICROCHIP_PATH = os.path.join(os.path.dirname(__file__), 'data2.txt')
 
-admission_data = sp.genfromtxt(PATH, delimiter=',')
+admission_data = sp.genfromtxt(ADMISSION_PATH, delimiter=',')
+microchip_data = sp.genfromtxt(MICROCHIP_PATH, delimiter=',')
 

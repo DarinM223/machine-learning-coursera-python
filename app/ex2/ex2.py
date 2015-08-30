@@ -29,6 +29,9 @@ def run():
 
     print('Plotting data with + indicating (y = 1) examples and o indicating (y = 0) examples.')
     plotData(data)
+    plt.xlabel('Exam 1 score')
+    plt.ylabel('Exam 2 score')
+    plt.legend('Admitted', 'Not admitted')
     plt.show()
 
     print('Program paused. Press enter to continue.')

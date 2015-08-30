@@ -1,24 +1,58 @@
 import scipy as sp
+import matplotlib.pyplot as plt
 
-from app.ex2 import admission_data
-from logistic_regression import costFunction, costFunctionReg, predict, find_minimum_theta
+from app.ex2 import microchip_data
+
+from logistic_regression import (
+    costFunction, 
+    costFunctionReg, 
+    predict, 
+    find_minimum_theta,
+    find_minimum_theta_reg,
+    mapFeature,
+    plotData,
+    plotDecisionBoundary
+)
 
 def run():
     theta = sp.zeros((3, 1))
-    data = sp.copy(admission_data)
+    data = sp.copy(microchip_data)
     X = data[:, [0, 1]]
     y = data[:, [2]]
     m = sp.shape(y)[0]
 
-    # Add intercept term to x
-    X = sp.concatenate((sp.ones((m, 1)), X), axis=1)
+    plotData(data)
+    plt.xlabel('Microchip Test 1')
+    plt.ylabel('Microchip Test 2')
+    plt.legend(['y = 1', 'y = 0'])
+    plt.show()
 
-    (theta, _) =  find_minimum_theta(theta, X, y)
+    """
+    Regularized Logistic Regression
+    """
 
-    (J, grad) = costFunction(theta, X, y)
-    print 'Cost: ',J[0, 0]
-    print 'Gradient: ',grad
-    (J, grad) = costFunctionReg(theta, X, y, 0.1)
-    print 'Cost: ',J[0, 0]
-    print 'Gradient: ',grad
+    X = mapFeature(data[:, 0], data[:, 1])
+
+    initial_theta = sp.zeros((X.shape[1], 1))
+
+    lmbda = 1
+
+    (J, grad) = costFunctionReg(initial_theta, X, y, lmbda)
+
+    print 'Cost at initial theta (zeros): ', J[0,0]
+    print 'Program paused. Press enter to continue.'
+    raw_input()
+
+    """
+    Regularization and Accuracies
+    """
+
+    initial_theta = sp.zeros((X.shape[1], 1))
+    lmbda = 1
+
+    (theta, J) = find_minimum_theta_reg(initial_theta, X, y, lmbda)
+
+    plotDecisionBoundary(data, X, theta)
+    plt.legend(['y = 1', 'y = 0', 'Decision Boundary'])
+    plt.show()
 
