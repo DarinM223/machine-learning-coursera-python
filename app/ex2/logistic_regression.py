@@ -3,15 +3,11 @@ from scipy.optimize import fmin
 import matplotlib.pyplot as plt
 
 def sigmoid(z):
-    """
-    Calculates the sigmoid of z (1/(1 + e^-z))
-    """
+    """Calculates the sigmoid of z (1/(1 + e^-z))"""
     return 1/(1.0 + sp.exp(-z))
 
 def costFunction(flattendTheta, X, y):
-    """
-    Calculate the cost and gradient for logistic regression
-    """
+    """Calculate the cost and gradient for logistic regression"""
     # numpy fmin function only allows flattened arrays instead of
     # matrixes which is stupid so it has to be converted every time
     flattendTheta = sp.asmatrix(flattendTheta)
@@ -89,9 +85,7 @@ def find_minimum_theta_reg(theta, X, y, lmbda):
     return result.x, result.fun
 
 def mapFeature(X1, X2):
-    """
-    Feature mapping function to polynomial features
-    """
+    """Feature mapping function to polynomial features"""
     degree = 6
     out = sp.ones((sp.shape(X1)[0], 1))
     for i in range(1, degree+1):
@@ -103,9 +97,7 @@ def mapFeature(X1, X2):
     return out
 
 def plotData(data):
-    """
-    Plots students that are both admitted and not admitted into a university
-    """
+    """Plots students that are both admitted and not admitted into a university"""
     pos = data[data[:, 2] == 1]
     neg = data[data[:, 2] == 0]
 

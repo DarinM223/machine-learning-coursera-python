@@ -17,17 +17,13 @@ def featureNormalize(x):
     return (x_norm, mu, sigma)
 
 def computeCost(x, y, theta):
-    """
-    Computes the cost function for multiple parameters
-    """
+    """Computes the cost function for multiple parameters"""
     m = sp.shape(y)[0]
     J = 1/(2.0 * m) * (x.dot(theta) - y).T.dot(x.dot(theta) - y)
     return J
 
 def gradientDescent(x, y, theta, alpha, num_iters):
-    """
-    Computes the gradient descent for multiple parameters
-    """
+    """Computes the gradient descent for multiple parameters"""
     m = sp.shape(y)[0]
     J_history = sp.zeros((num_iters, 1))
 
@@ -43,9 +39,7 @@ def gradientDescent(x, y, theta, alpha, num_iters):
     return (grad, J_history)
 
 def normalEqn(x, y):
-    """
-    Determines theta using a mathmatical formula instead of gradient descent
-    """
+    """Determines theta using a mathmatical formula instead of gradient descent"""
     theta = linalg.inv(x.T.dot(x)).dot(x.T).dot(y)
     return theta
 

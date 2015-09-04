@@ -1,17 +1,7 @@
 import scipy as sp
 import matplotlib.pyplot as plt
 
-from app.ex2 import admission_data
-
-from logistic_regression import (
-    costFunction, 
-    costFunctionReg, 
-    sigmoid,
-    predict, 
-    find_minimum_theta, 
-    plotData,
-    plotDecisionBoundary
-)
+from app.ex2 import admission_data, logistic_regression as logres
 
 def run():
     theta = sp.zeros((3, 1))
@@ -28,7 +18,7 @@ def run():
     """
 
     print('Plotting data with + indicating (y = 1) examples and o indicating (y = 0) examples.')
-    plotData(data)
+    logres.plotData(data)
     plt.xlabel('Exam 1 score')
     plt.ylabel('Exam 2 score')
     plt.legend('Admitted', 'Not admitted')
@@ -45,7 +35,7 @@ def run():
 
     initial_theta = sp.zeros((n, 1))
 
-    (cost, grad) = costFunction(initial_theta, X, y)
+    (cost, grad) = logres.costFunction(initial_theta, X, y)
 
     print('Cost at initial theta (zeros): ', cost)
     print('Gradient at initial theta (zeros): ', grad)
@@ -57,12 +47,12 @@ def run():
     Part 3: Optimizing using fminunc
     """
 
-    (theta, cost) = find_minimum_theta(theta, X, y)
+    (theta, cost) = logres.find_minimum_theta(theta, X, y)
 
     print('Cost at theta found by fmin: ', cost)
     print('Theta: ', theta)
 
-    plotDecisionBoundary(data, X, theta)
+    logres.plotDecisionBoundary(data, X, theta)
 
     plt.show()
 
@@ -70,7 +60,7 @@ def run():
     Part 4: Predict and Accuracies
     """
 
-    prob = sigmoid(sp.asmatrix([1, 45, 85]).dot(theta))
+    prob = logres.sigmoid(sp.asmatrix([1, 45, 85]).dot(theta))
     print('For a student with scores 45 and 85, we predict an admission probability of ', prob[0, 0])
     print('Program paused. Press enter to continue.')
 
