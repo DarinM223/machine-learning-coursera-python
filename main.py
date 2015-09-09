@@ -1,19 +1,21 @@
 from app.ex1 import ex1_multi
 from app.ex2 import ex2, ex2_reg
+from app.ex3 import ex3
 import sys
 
 arguments = sys.argv
 
+modules = {
+    'ex1': ex1_multi,
+    'ex2': ex2,
+    'ex2_reg': ex2_reg,
+    'ex3': ex3
+}
+
 optional_argument = False
 for arg in arguments:
-    if arg == 'ex1':
-        ex1_multi.run()
-        optional_argument = True
-    elif arg == 'ex2':
-        ex2.run()
-        optional_argument = True
-    elif arg == 'ex2_reg':
-        ex2_reg.run()
+    if arg in modules:
+        modules[arg].run()
         optional_argument = True
 
 if optional_argument == False:

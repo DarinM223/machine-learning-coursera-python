@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 
 def sigmoid(z):
     """Calculates the sigmoid of z (1/(1 + e^-z))"""
-    return 1/(1.0 + sp.exp(-z))
+    # return 1/(1.0 + sp.exp(-z))
+    return sp.special.expit(z)
 
 def costFunction(flattendTheta, X, y):
     """Calculate the cost and gradient for logistic regression"""
