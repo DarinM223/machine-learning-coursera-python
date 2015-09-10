@@ -9,18 +9,18 @@ def run():
 
     rand_indices = sp.random.permutation(m)
 
-    # multiclass.displayData(X)
+    multiclass.displayData(X)
 
-    #print('Program paused. Press enter to continue.')
-    #raw_input()
+    print('Program paused. Press enter to continue.')
+    raw_input()
 
     print('Training One-vs-All Logistic Regression...')
     lamda = 0.1
     num_labels = 10
     all_theta = multiclass.oneVsAll(X, y, num_labels, lamda)
 
-    #print('Program paused. Press enter to continue.')
-    #raw_input()
+    print('Program paused. Press enter to continue.')
+    raw_input()
 
     print all_theta.shape
 
